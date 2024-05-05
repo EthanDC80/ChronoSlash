@@ -57,7 +57,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Mouse")]
     private Vector2 mouse;
-    public float sensitivity = 100;
+    public static float sensitivity = 100;
+    public static bool cameraMoveable = true;
 
     [Header("Components")]
     public Transform orientation;
@@ -116,9 +117,12 @@ public class PlayerController : MonoBehaviour {
         else
             rb.drag = 0;
 
-        mouse.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        mouse.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        mouse.y = Mathf.Clamp(mouse.y, -90f, 90f);
+        if (cameraMoveable) {
+            mouse.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            mouse.y += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            mouse.y = Mathf.Clamp(mouse.y, -90f, 90f);
+        }
+        
 
         //Debug.Log(canPoundJump);
         if (canPoundJump && grounded) {
@@ -133,7 +137,7 @@ public class PlayerController : MonoBehaviour {
             shake.start = true;
             pounded = false;
         }
-        Debug.Log(pounded + " " + canPoundJump);
+        // Debug.Log(pounded + " " + canPoundJump);
         CheckForSwingPoints();
     }
 
