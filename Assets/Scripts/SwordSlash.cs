@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +67,11 @@ public class SwordSlash : MonoBehaviour
 
     void Slash()
     {
+        if (Mathf.Sqrt(Mathf.Pow(_slashVector.x, 2) + Mathf.Pow(_slashVector.y, 2)) < 5) {
+            _animator.SetTrigger("LSlash");
+            return;
+        }
+            
         float angle = Mathf.Atan(_slashVector.y / _slashVector.x) * Mathf.Rad2Deg;
         if (_slashVector.x < 0) angle = 180 + angle;
         if (_slashVector.x > 0 && _slashVector.y < 0) angle = 360 + angle;

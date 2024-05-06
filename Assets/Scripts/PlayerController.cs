@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour {
     float poundTimeElapsed = 0f;
     public float poundWindow = 1f;
 
+    [Header("Animations")]
+    private Animator _animator;
+
     float horizontalInput;
     float verticalInput;
 
@@ -87,6 +90,11 @@ public class PlayerController : MonoBehaviour {
         crouching,
         air,
         grappling
+    }
+
+    void Awake()
+    {
+        _animator = GameObject.FindWithTag("Sword").GetComponent<Animator>();
     }
 
     void Start() {
@@ -323,6 +331,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void StartSwing(RaycastHit rayHit) {
+        _animator.SetTrigger("Sheathe");
+
         grappling = true;
         swingPoint = rayHit.point;
         joint = gameObject.AddComponent<SpringJoint>();
@@ -343,6 +353,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void StopSwing() {
+        _animator.SetTrigger("Unsheathe");
+
         grappling = false;
         lr.positionCount = 0;
         Destroy(joint);
