@@ -78,13 +78,21 @@ public class SwordSlash : MonoBehaviour
 
         Debug.Log(angle);
         
-        if ((0 < angle && angle < 45f) || (315 < angle && angle < 360))
+        if ((0 < angle && angle < 22.5f) || (337.5f < angle && angle < 360))
             _animator.SetTrigger("RSlash");
-        if (45 < angle && angle < 135)
+        if (22.5f < angle && angle < 67.5f)
+            _animator.SetTrigger("URSlash");
+        if (67.5f < angle && angle < 112.5f)
             _animator.SetTrigger("USlash");
-        if (135 < angle && angle < 225)
+        if (112.5f < angle && angle < 157.5f)
+            _animator.SetTrigger("ULSlash");
+        if (157.5f < angle && angle < 202.5f)
             _animator.SetTrigger("LSlash");
-        if (225 < angle && angle < 315)
+        if (202.5f < angle && angle < 247.5f)
+            _animator.SetTrigger("DLSlash");
+        if (247.5f < angle && angle < 292.5f)
             _animator.SetTrigger("DSlash");
+        if (292.5f < angle && angle < 337.5f)
+            _animator.SetTrigger("DRSlash");
     }
 }
