@@ -6,10 +6,10 @@ using TMPro;
 public class PlayerController : MonoBehaviour {
 
     [Header("Movement")]
-    private float moveSpeed;
     public float walkSpeed = 7f;
     public float sprintSpeed = 10f;
     public float airSpeed = 5f;
+    private float moveSpeed;
 
     public float groundDrag = 5f;
 
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
     public bool grappling = false;
     public float grappleSpeed = 25f;
 
+    [Header("Grapple")]
     public LineRenderer lr;
     public Transform gunTip;
 
@@ -56,23 +57,24 @@ public class PlayerController : MonoBehaviour {
     public float extendCableSpeed;
 
     [Header("Mouse")]
-    private Vector2 mouse;
-    public static float sensitivity = 100;
+    public float MouseSensitivity = 100;
+    public static float sensitivity;
     public static bool cameraMoveable = true;
+    private Vector2 mouse;
 
     [Header("Components")]
     public Transform orientation;
     public GameObject cam;
 
     [Header("Ground Pround")]
+    public float poundWindow = 1f;
     Shake shake;
     bool pounded = false;
     bool canPoundJump = false;
     float poundTimeElapsed = 0f;
-    public float poundWindow = 1f;
 
     [Header("Animations")]
-    private Animator _animator;
+    public Animator _animator;
 
     float horizontalInput;
     float verticalInput;
@@ -109,6 +111,8 @@ public class PlayerController : MonoBehaviour {
 
         startYScale = transform.localScale.y;
         shake = cam.GetComponent<Shake>();
+
+        setMouseSens();
     }
 
 
@@ -376,4 +380,8 @@ public class PlayerController : MonoBehaviour {
             return;
         gun.GetComponent<GunSystem>().CheckSwingPoints();
     }
+
+    public void setMouseSens() {
+        sensitivity = MouseSensitivity;
+	}
 }
