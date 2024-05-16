@@ -10,6 +10,12 @@ public class RoomManager : MonoBehaviour
 
     public GameObject roomJointPrefab;
 
+    private GameObject currentRoom;
+    private int currentIndex;
+    private GameObject nextRoom;
+    private int nextIndex;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +36,20 @@ public class RoomManager : MonoBehaviour
         Instantiate(roomPrefabs[0]);
 
         int roomIndex = Random.Range(1,roomData.Length);
-        Instantiate(roomPrefabs[roomIndex], new Vector3(0, 0,roomData[0].exit1.transform.position.z + roomData[roomIndex].roomLength/2 + roomJointPrefab.transform.localScale.z), Quaternion.Euler(0,0,0));
+        float zPos = roomData[0].exit[0].transform.position.z + roomData[roomIndex].roomLength/2 + roomJointPrefab.transform.localScale.z;
+        currentRoom = Instantiate(roomPrefabs[roomIndex], new Vector3(0, 0, zPos), Quaternion.Euler(0,0,0));
+        currentIndex = roomIndex;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // GenerateRoom();
+    }
+
+    void GenerateRoom()
+    {
+        int roomIndex = Random.Range(1,roomPrefabs.Length);
+        GameObject exit = roomData[roomIndex].exit[Random.Range(0, roomData[roomIndex].numberExits)];
     }
 }

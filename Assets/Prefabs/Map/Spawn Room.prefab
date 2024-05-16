@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7499532174213990996}
+  - component: {fileID: 7534930304072241079}
   m_Layer: 0
   m_Name: Spawn Room
   m_TagString: Untagged
@@ -136,6 +137,26 @@ Transform:
   - {fileID: 9045983470830724984}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7534930304072241079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570409064420444327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d329f4adfbd4df4b934bc38e7483057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomID: 000
+  roomWidth: 5
+  roomLength: 5
+  roomHeight: 3
+  numberExits: 3
+  entrance: {fileID: 0}
+  exit:
+  - {fileID: 0}
 --- !u!1001 &12457790753392570
 PrefabInstance:
   m_ObjectHideFlags: 0
