@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2372176237549270208}
   m_Layer: 0
   m_Name: CorridorJoint
-  m_TagString: Untagged
+  m_TagString: Corridor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,6 +170,10 @@ PrefabInstance:
     - target: {fileID: 217449558587350849, guid: 1cd7b30bf5d96044fa4560bf19e91b49, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 217449558587350849, guid: 1cd7b30bf5d96044fa4560bf19e91b49, type: 3}
+      propertyPath: m_TagString
+      value: Corridor
       objectReference: {fileID: 0}
     - target: {fileID: 598795768368350715, guid: 1cd7b30bf5d96044fa4560bf19e91b49, type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,6 +5,8 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour {
 
+    private RoomManager roomManager;
+
     [Header("Movement")]
     public float walkSpeed = 7f;
     public float sprintSpeed = 10f;
@@ -97,6 +99,7 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         _animator = GameObject.FindWithTag("Sword").GetComponent<Animator>();
+        roomManager = GameObject.FindWithTag("RoomManager").GetComponent<RoomManager>();
     }
 
     void Start() {
@@ -114,7 +117,6 @@ public class PlayerController : MonoBehaviour {
 
         setMouseSens();
     }
-
 
     void Update() {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -161,6 +163,13 @@ public class PlayerController : MonoBehaviour {
         MovePlayer();
         transform.rotation = Quaternion.Euler(0, mouse.x, 0);
         cam.transform.rotation = Quaternion.Euler(-mouse.y, mouse.x, 0);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Corridor") {
+            roomManager.GenerateRoom(other.gameObject);
+        }
     }
 
     void MyInput() {
