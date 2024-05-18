@@ -69,9 +69,7 @@ public class RoomManager : MonoBehaviour
                 currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
         }
-        currentRoom.transform.position = corridor.transform.position
-         - currentRoom.transform.right*1.5f
-         ;
+        currentRoom.transform.position = corridor.transform.position - currentRoom.transform.right*1.5f;
 
         GenerateExits();
 
