@@ -53,22 +53,28 @@ public class RoomManager : MonoBehaviour
     {
         int roomIndex = Random.Range(1,roomPrefabs.Length);
         currentRoom = Instantiate(roomPrefabs[roomIndex]);
+        currentRoomData = currentRoom.GetComponent<RoomData>();
 
         switch (corridor.transform.rotation.eulerAngles.y){
             case 0:
-                currentRoom.transform.rotation = Quaternion.Euler(0, 180, 0);
-                break;
-            case 90:
-                currentRoom.transform.rotation = Quaternion.Euler(0, 270, 0);
-                break;
-            case 180:
-                currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
-                break;
-            case 270:
                 currentRoom.transform.rotation = Quaternion.Euler(0, 90, 0);
                 break;
+            case 90:
+                currentRoom.transform.rotation = Quaternion.Euler(0, 180, 0);
+                break;
+            case 180:
+                currentRoom.transform.rotation = Quaternion.Euler(0, 270, 0);
+                break;
+            case 270:
+                currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
+                break;
         }
-        currentRoom.transform.position = corridor.transform.position + currentRoom.transform.forward*1.5f;
+        currentRoom.transform.position = corridor.transform.position
+         - currentRoom.transform.right*1.5f
+         ;
+
+        GenerateExits();
+
         // currentRoom.transform.position = corridor.transform.position;
         // currentRoom.transform.rotation = corridor.transform.rotation;
 

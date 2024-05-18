@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1358357422259804905, guid: 1328c55a6b236e9478bffc40443e2bfb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358357422259804905, guid: 1328c55a6b236e9478bffc40443e2bfb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -404,8 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
-  - {fileID: 5570409064420444327, guid: bc183cb74be4d9843a3ca6575ec1905c, type: 3}
-  - {fileID: 5475262617467001250, guid: da4da14c9945e734e93bcb9a386ae227, type: 3}
+  - {fileID: 472637803617300990, guid: 5113115e82de00145b4398b50edaa421, type: 3}
+  - {fileID: 7753179967448680987, guid: 4710b030de48eff4ead24b76c9226853, type: 3}
   roomJointPrefab: {fileID: 6612790151766623048, guid: 99f605dbdbd5eca4bad7f7b0134671a9, type: 3}
 --- !u!4 &2117712870
 Transform:

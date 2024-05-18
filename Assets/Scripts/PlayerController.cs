@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Corridor") {
             roomManager.GenerateRoom(other.gameObject);
+            other.gameObject.tag = "CorridorActivated";
         }
     }
 
