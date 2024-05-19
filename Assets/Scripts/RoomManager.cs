@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class RoomManager : MonoBehaviour
 
     private GameObject currentRoom;
     private RoomData currentRoomData;
+
+    private GameObject prevRoom1, prevRoom2;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +54,10 @@ public class RoomManager : MonoBehaviour
 
     public void GenerateRoom(GameObject corridor)
     {
+        prevRoom2 = prevRoom1;
+        prevRoom1 = currentRoom;
+        if (prevRoom2 != null) Destroy(prevRoom2);
+
         int roomIndex = Random.Range(1,roomPrefabs.Length);
         currentRoom = Instantiate(roomPrefabs[roomIndex]);
         currentRoomData = currentRoom.GetComponent<RoomData>();
@@ -69,7 +76,7 @@ public class RoomManager : MonoBehaviour
                 currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
         }
-        currentRoom.transform.position = corridor.transform.position - currentRoom.transform.right*1.5f;
+        currentRoom.transform.position = corridor.transform.position - corridor.transform.up*1.5f;
 
         GenerateExits();
 
@@ -124,7 +131,8 @@ public class RoomManager : MonoBehaviour
                     break;
             }
 
-            instanceExit.transform.position = exit.transform.position - instanceExit.transform.forward*1.5f + instanceExit.transform.right*1.5f;
+            instanceExit.transform.position = exit.transform.position - exit.transform.right*1.5f - exit.transform.up*1.5f;
+            instanceExit.transform.parent = currentRoom.transform;
         }
     }
 }

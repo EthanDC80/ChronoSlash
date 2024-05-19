@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2087285196975431386}
   - component: {fileID: 4654530512478776979}
   - component: {fileID: 63742323953122182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stair Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
