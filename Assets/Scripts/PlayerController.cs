@@ -5,6 +5,8 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour {
 
+    [SerializeField] private bool testing;
+
     private RoomManager roomManager;
 
     [Header("Movement")]
@@ -99,7 +101,8 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         _animator = GameObject.FindWithTag("Sword").GetComponent<Animator>();
-        roomManager = GameObject.FindWithTag("RoomManager").GetComponent<RoomManager>();
+
+        if (!testing) roomManager = GameObject.FindWithTag("RoomManager").GetComponent<RoomManager>();
     }
 
     void Start() {

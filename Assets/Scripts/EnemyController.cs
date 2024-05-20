@@ -1,24 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyController : MonoBehaviour {
-    public int health;
-    public int healthBar = 10;
+
+    private new Transform transform;
+    private new Rigidbody rigidbody;
+    private Transform playerTransform;
+
+
+    private float moveSpeed = 10;
+    private Vector3 moveDirection;
+
     // Start is called before the first frame update
-    void Start() {
-        health = healthBar;
+    void Start() 
+    {
+        transform = gameObject.GetComponent<Transform>();
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
-    void Update() {
-        if (health <= 0) {
-            Destroy(gameObject);
-        }
-        //Debug.Log(health);
+    void Update() 
+    {
+        Move();
     }
 
-    public void TakeDamage(int damage) {
-        health -= damage;
+    private void Move()
+    {
+        transform.LookAt(playerTransform);
+        rigidbody.AddForce(transform.forward * moveSpeed, ForceMode.Force);
     }
 }

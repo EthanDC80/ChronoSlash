@@ -25,7 +25,7 @@ public class SwordSlash : MonoBehaviour
     {
         _originalSensitivity = PlayerController.sensitivity;
         _slowSensitivity = PlayerController.sensitivity * 5f;
-        Debug.Log(Time.fixedDeltaTime);
+        // Debug.Log(Time.fixedDeltaTime);
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class SwordSlash : MonoBehaviour
 
             _endPos = Input.mousePosition;
             _slashVector = _endPos - _startPos;
-            Debug.Log(_slashVector);
+            // Debug.Log(_slashVector);
 
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
@@ -76,7 +76,7 @@ public class SwordSlash : MonoBehaviour
         if (_slashVector.x < 0) angle = 180 + angle;
         if (_slashVector.x > 0 && _slashVector.y < 0) angle = 360 + angle;
 
-        Debug.Log(angle);
+        // Debug.Log(angle);
         
         if ((0 < angle && angle < 22.5f) || (337.5f < angle && angle < 360))
             _animator.SetTrigger("RSlash");

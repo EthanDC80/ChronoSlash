@@ -90,8 +90,8 @@ public class GunSystem : MonoBehaviour {
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy)) {
             //Debug.Log(rayHit.collider.name);
 
-            if (rayHit.collider.CompareTag("Enemy"))
-                rayHit.collider.GetComponent<EnemyController>().TakeDamage(damage);
+            // if (rayHit.collider.CompareTag("Enemy"))
+            //     rayHit.collider.GetComponent<EnemyController>().TakeDamage(damage);
         }
 
         //ShakeCamera

@@ -62,20 +62,41 @@ public class RoomManager : MonoBehaviour
         currentRoom = Instantiate(roomPrefabs[roomIndex]);
         currentRoomData = currentRoom.GetComponent<RoomData>();
 
-        switch (corridor.transform.rotation.eulerAngles.y){
+        // switch (corridor.transform.parent.rotation.eulerAngles.y){
+        //     case 0:
+        //         currentRoom.transform.rotation = Quaternion.Euler(0, 90, 0);
+        //         break;
+        //     case 90:
+        //         currentRoom.transform.rotation = Quaternion.Euler(0, 180, 0);
+        //         break;
+        //     case 180:
+        //         currentRoom.transform.rotation = Quaternion.Euler(0, 270, 0);
+        //         break;
+        //     case 270:
+        //         currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
+        //         break;
+        // }
+
+        switch (corridor.transform.parent.rotation.eulerAngles.y){
             case 0:
-                currentRoom.transform.rotation = Quaternion.Euler(0, 90, 0);
-                break;
-            case 90:
                 currentRoom.transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
-            case 180:
+            case 90:
                 currentRoom.transform.rotation = Quaternion.Euler(0, 270, 0);
                 break;
-            case 270:
+            case 180:
                 currentRoom.transform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
+            case 270:
+                currentRoom.transform.rotation = Quaternion.Euler(0, 90, 0);
+                break;
         }
+
+        Debug.Log(corridor.transform.parent.name + " " + corridor.transform.parent.rotation.eulerAngles);
+        Debug.Log(currentRoom.name + " " + currentRoom.transform.rotation.eulerAngles);
+
+        // currentRoom.transform.rotation = Quaternion.Euler(0, corridor.transform.rotation.eulerAngles.y, 0);
+
         currentRoom.transform.position = corridor.transform.position - corridor.transform.up*1.5f;
 
         GenerateExits();
@@ -114,25 +135,42 @@ public class RoomManager : MonoBehaviour
     {
         foreach (GameObject exit in currentRoomData.exit) {
             GameObject instanceExit = Instantiate(roomJointPrefab);
-            // Debug.Log(exit.name + " " + exit.transform.rotation.eulerAngles);
+        
+            // switch (Mathf.RoundToInt(exit.transform.rotation.eulerAngles.y)){
+            //     case 0:
+            //         instanceExit.transform.rotation = Quaternion.Euler(0, 180, 0);
+            //         break;
+            //     case 90:
+            //         instanceExit.transform.rotation = Quaternion.Euler(0, 270, 0);
+            //         break;
+            //     case 180:
+            //         instanceExit.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //         break;
+            //     case 270:
+            //         instanceExit.transform.rotation = Quaternion.Euler(0, 90, 0);
+            //         break;
+            // }
 
-            switch (exit.transform.rotation.eulerAngles.y){
+            switch (Mathf.RoundToInt(exit.transform.rotation.eulerAngles.y)){
                 case 0:
-                    instanceExit.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    instanceExit.transform.rotation = Quaternion.Euler(0, 90, 0);
                     break;
                 case 90:
-                    instanceExit.transform.rotation = Quaternion.Euler(0, 270, 0);
+                    instanceExit.transform.rotation = Quaternion.Euler(0, 180, 0);
                     break;
                 case 180:
-                    instanceExit.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    instanceExit.transform.rotation = Quaternion.Euler(0, 270, 0);
                     break;
                 case 270:
-                    instanceExit.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    instanceExit.transform.rotation = Quaternion.Euler(0, 0, 0);
                     break;
             }
 
             instanceExit.transform.position = exit.transform.position - exit.transform.right*1.5f - exit.transform.up*1.5f;
             instanceExit.transform.parent = currentRoom.transform;
+
+            // Debug.Log(exit.name + " " + exit.transform.rotation.eulerAngles);
+            // Debug.Log(instanceExit.name + " " + instanceExit.transform.rotation.eulerAngles);
         }
     }
 }
