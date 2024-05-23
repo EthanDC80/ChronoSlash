@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,7 +393,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2.51214
-  m_BaseOffset: 0
+  m_BaseOffset: 0.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &163124548
@@ -421,7 +421,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &163124549
 BoxCollider:
@@ -443,7 +443,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.895717, y: 1.25607, z: 0.83156425}
-  m_Center: {x: 0, y: 0.628035, z: 0.027925223}
+  m_Center: {x: 0, y: 0.828035, z: 0.027925223}
 --- !u!4 &163124553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4967576429096158, guid: 4abff0341d80f9742ab1ec2775caac08, type: 3}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -891,7 +891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967576429096158, guid: 4abff0341d80f9742ab1ec2775caac08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4967576429096158, guid: 4abff0341d80f9742ab1ec2775caac08, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1814,6 +1814,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stair (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7070084064114393466, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070084064114393466, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8440791698188523843, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 58.5
@@ -1853,6 +1861,14 @@ PrefabInstance:
     - target: {fileID: 8440791698188523843, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518738130988079986, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0319
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518738130988079986, guid: 2373f418a04cae84589b6d3ec92759d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1187
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
