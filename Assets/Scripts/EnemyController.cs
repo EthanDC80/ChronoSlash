@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
@@ -17,6 +18,9 @@ public class EnemyController : MonoBehaviour {
 
     private bool isAttacking;
 
+    private NavMeshAgent agent;
+    Vector3 lastSeen;
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -25,7 +29,7 @@ public class EnemyController : MonoBehaviour {
         animator = gameObject.GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         swordSlash = GameObject.FindWithTag("Player").GetComponent<SwordSlash>();
-        
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -37,16 +41,18 @@ public class EnemyController : MonoBehaviour {
 
     private void Move()
     {
+        Vector3 lastSeen = playerTransform.position;
         if (!isAttacking) {
-            Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
-            rotation.x = 0f;
-            rotation.z = 0f;
-            transform.rotation = Quaternion.Euler(rotation);
+            //Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
+            //rotation.x = 0f;
+            //rotation.z = 0f;
+            //transform.rotation = Quaternion.Euler(rotation);
             
             Vector3 direction = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
 
             rigidbody.AddForce(direction * moveSpeed, ForceMode.Force);
-            // Debug.Log(rigidbody.velocity.magnitude);
+            //agent.destination = playerTransform.position;
+            //Debug.Log(rigidbody.velocity.magnitude);
 
             Vector3 flatVel = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
 
@@ -55,10 +61,13 @@ public class EnemyController : MonoBehaviour {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rigidbody.velocity = new Vector3(limitedVel.x, rigidbody.velocity.y, limitedVel.z);
             }
+            lastSeen = playerTransform.position;
         }
 
         if (isAttacking && new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z).magnitude > 0.1f) {
             rigidbody.velocity *= 0.5f;
+            //agent.destination = lastSeen;
+            //agent.speed *= 0.5f;
         }
         
     }
@@ -75,6 +84,7 @@ public class EnemyController : MonoBehaviour {
     private void OnCollisionEnter(Collision other) {
         if (swordSlash.isAttacking && other.gameObject.CompareTag("SwordCollider")) {
             rigidbody.AddForceAtPosition(transform.right, transform.position+Vector3.up*0.5f, ForceMode.Impulse);
+            Debug.Log("what the fuck is this");
         }
     }
 
