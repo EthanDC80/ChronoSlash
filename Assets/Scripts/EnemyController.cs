@@ -12,11 +12,13 @@ public class EnemyController : MonoBehaviour {
     private Animator animator;
     private Transform playerTransform;
     private SwordSlash swordSlash;
+    private PlayerController playerController;
 
     private float moveSpeed = 5;
     private Vector3 moveDirection;
 
-    private bool isAttacking;
+    public bool isAttacking;
+    private bool isActive;
 
     private NavMeshAgent agent;
     Vector3 lastSeen;
@@ -29,7 +31,14 @@ public class EnemyController : MonoBehaviour {
         animator = gameObject.GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         swordSlash = GameObject.FindWithTag("Player").GetComponent<SwordSlash>();
+<<<<<<< Updated upstream
         agent = GetComponent<NavMeshAgent>();
+=======
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        
+        
+        isActive = true;
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -41,12 +50,20 @@ public class EnemyController : MonoBehaviour {
 
     private void Move()
     {
+<<<<<<< Updated upstream
         Vector3 lastSeen = playerTransform.position;
         if (!isAttacking) {
             //Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
             //rotation.x = 0f;
             //rotation.z = 0f;
             //transform.rotation = Quaternion.Euler(rotation);
+=======
+        if (!isAttacking && isActive) {
+            Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
+            rotation.x = 0f;
+            rotation.z = 0f;
+            transform.rotation = Quaternion.Euler(rotation);
+>>>>>>> Stashed changes
             
             Vector3 direction = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
 
@@ -74,6 +91,7 @@ public class EnemyController : MonoBehaviour {
 
     private void Attack()
     {
+        if (!isActive) return;
         Vector3 toPlayer = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
         if (toPlayer.magnitude < 3 && !isAttacking) {
             isAttacking = true;
@@ -81,10 +99,36 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         if (swordSlash.isAttacking && other.gameObject.CompareTag("SwordCollider")) {
+<<<<<<< Updated upstream
             rigidbody.AddForceAtPosition(transform.right, transform.position+Vector3.up*0.5f, ForceMode.Impulse);
             Debug.Log("what the fuck is this");
+=======
+            // Debug.Log("Attacked");
+            isActive = false;
+            rigidbody.freezeRotation = false;
+            switch(swordSlash.attackDirection) {
+                case 0:
+                    rigidbody.AddForceAtPosition(transform.forward * -10f + transform.up*-5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+                    break;
+                case -1:
+                    rigidbody.AddForceAtPosition(transform.right * 5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+                    break;
+                case -2:
+                    rigidbody.AddForceAtPosition(transform.right * 5f + transform.up*-3f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+                    break;
+                case 1:
+                    rigidbody.AddForceAtPosition(transform.right * -5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+                    break;
+                case 2:
+                    rigidbody.AddForceAtPosition(transform.right * -5f + transform.up*-3f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+                    break;
+            }
+            playerController.enemyDestroyed = true;
+            StartCoroutine(despawnAfter3());
+            // rigidbody.AddForceAtPosition(transform.right * 10f, transform.position+Vector3.up*3f, ForceMode.Impulse);
+>>>>>>> Stashed changes
         }
     }
 
@@ -106,5 +150,12 @@ public class EnemyController : MonoBehaviour {
     {
         yield return new WaitForSeconds(3);
         isAttacking = false;
+    }
+
+    IEnumerator despawnAfter3()
+    {
+        yield return new WaitForSeconds(3);
+        playerController.enemyDestroyed = true;
+        Destroy(gameObject);
     }
 }

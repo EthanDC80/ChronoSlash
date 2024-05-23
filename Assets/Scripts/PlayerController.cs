@@ -70,6 +70,9 @@ public class PlayerController : MonoBehaviour {
     //Sense Danger
     private bool inDanger;
     private Image vignetteImage;
+    public bool enemyDestroyed;
+    public int healthPoints = 5;
+    private bool invincible;
 
     [Header("Components")]
     public Transform orientation;
@@ -165,9 +168,15 @@ public class PlayerController : MonoBehaviour {
         // Debug.Log(pounded + " " + canPoundJump);
         CheckForSwingPoints();
 
-        if (inDanger) {
-            // Debug.Log("Danger!");
+        if (enemyDestroyed) {
+            inDanger = false;
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
+            enemyDestroyed = false;
         }
+
+
     }
 
     void LateUpdate() {
@@ -195,6 +204,19 @@ public class PlayerController : MonoBehaviour {
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0.2f);
         }
+        
+        if (other.gameObject.CompareTag("EnemySwordCollider")) {
+            if(other.GetComponentInParent<EnemyController>().isAttacking && !invincible) {
+                Debug.Log("Attacked");
+                healthPoints--;
+                if (healthPoints == 0) {
+                    Debug.Log("GAMEOVER");
+                    //TODO ADD GAMEOVER METHOD
+                } else 
+                    StartCoroutine(InvincibleBuffer());
+
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other) {
@@ -204,6 +226,12 @@ public class PlayerController : MonoBehaviour {
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
         }
+    }
+
+    IEnumerator InvincibleBuffer() {
+        invincible = true;
+        yield return new WaitForSeconds(2);
+        invincible = false;
     }
 
     void MyInput() {
