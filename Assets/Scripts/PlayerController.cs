@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour {
         CheckForSwingPoints();
 
         if (inDanger) {
-            Debug.Log("Danger!");
+            // Debug.Log("Danger!");
         }
     }
 

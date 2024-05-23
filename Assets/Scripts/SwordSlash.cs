@@ -10,7 +10,8 @@ public class SwordSlash : MonoBehaviour
 
     private Vector3 _startPos, _endPos;
     private Vector3 _slashVector;
-    private bool _isSlash, _createSlash;
+    public bool isAttacking;
+    
 
     private float _originalSensitivity, _slowSensitivity;
 
@@ -32,7 +33,6 @@ public class SwordSlash : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            _isSlash = true;
 
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -43,12 +43,7 @@ public class SwordSlash : MonoBehaviour
             PlayerController.cameraMoveable = false;
         }
 
-        if (_isSlash) {
-
-        }
-
         if (Input.GetMouseButtonUp(0)) {
-            _isSlash = false;
 
             _endPos = Input.mousePosition;
             _slashVector = _endPos - _startPos;
@@ -69,6 +64,7 @@ public class SwordSlash : MonoBehaviour
     {
         if (Mathf.Sqrt(Mathf.Pow(_slashVector.x, 2) + Mathf.Pow(_slashVector.y, 2)) < 5) {
             _animator.SetTrigger("LSlash");
+            StartCoroutine(isSlash25());
             return;
         }
             
@@ -94,5 +90,14 @@ public class SwordSlash : MonoBehaviour
             _animator.SetTrigger("DSlash");
         if (292.5f < angle && angle < 337.5f)
             _animator.SetTrigger("DRSlash");
+
+        StartCoroutine(isSlash25());
+    }
+
+    IEnumerator isSlash25()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(0.25f);
+        isAttacking = false;
     }
 }

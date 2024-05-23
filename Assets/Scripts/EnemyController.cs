@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour {
     private new Rigidbody rigidbody;
     private Animator animator;
     private Transform playerTransform;
+    private SwordSlash swordSlash;
 
     private float moveSpeed = 5;
     private Vector3 moveDirection;
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour {
         rigidbody = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        swordSlash = GameObject.FindWithTag("Player").GetComponent<SwordSlash>();
         
     }
 
@@ -69,6 +71,19 @@ public class EnemyController : MonoBehaviour {
             StartCoroutine(slashWarmup());
         }
     }
+
+    private void OnCollisionEnter(Collision other) {
+        if (swordSlash.isAttacking && other.gameObject.CompareTag("SwordCollider")) {
+            rigidbody.AddForceAtPosition(transform.right, transform.position+Vector3.up*0.5f, ForceMode.Impulse);
+        }
+    }
+
+    // oid OnCollisionEnter(Collision other) {
+    //     if (isAttacking && other.gameObject.tag == "Enemy") {
+    //         other.rigidbody.AddForceAtPosition();
+    //         thingToPush.position+Vector3.up*0.5f
+    //     }
+    // }
 
     IEnumerator slashWarmup()
     {
