@@ -31,14 +31,10 @@ public class EnemyController : MonoBehaviour {
         animator = gameObject.GetComponent<Animator>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         swordSlash = GameObject.FindWithTag("Player").GetComponent<SwordSlash>();
-<<<<<<< Updated upstream
         agent = GetComponent<NavMeshAgent>();
-=======
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         
-        
         isActive = true;
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -50,20 +46,20 @@ public class EnemyController : MonoBehaviour {
 
     private void Move()
     {
-<<<<<<< Updated upstream
+// <<<<<<< Updated upstream
         Vector3 lastSeen = playerTransform.position;
         if (!isAttacking) {
             //Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
             //rotation.x = 0f;
             //rotation.z = 0f;
             //transform.rotation = Quaternion.Euler(rotation);
-=======
-        if (!isAttacking && isActive) {
-            Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
-            rotation.x = 0f;
-            rotation.z = 0f;
-            transform.rotation = Quaternion.Euler(rotation);
->>>>>>> Stashed changes
+// ======= *Do whatever you need to get the movement working
+//         if (!isAttacking && isActive) {
+//             Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
+//             rotation.x = 0f;
+//             rotation.z = 0f;
+//             transform.rotation = Quaternion.Euler(rotation);
+// >>>>>>> Stashed changes
             
             Vector3 direction = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
 
@@ -95,16 +91,13 @@ public class EnemyController : MonoBehaviour {
         Vector3 toPlayer = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
         if (toPlayer.magnitude < 3 && !isAttacking) {
             isAttacking = true;
-            StartCoroutine(slashWarmup());
+            StartCoroutine(SlashWarmup());
         }
     }
 
     private void OnTriggerEnter(Collider other) {
         if (swordSlash.isAttacking && other.gameObject.CompareTag("SwordCollider")) {
-<<<<<<< Updated upstream
-            rigidbody.AddForceAtPosition(transform.right, transform.position+Vector3.up*0.5f, ForceMode.Impulse);
-            Debug.Log("what the fuck is this");
-=======
+
             // Debug.Log("Attacked");
             isActive = false;
             rigidbody.freezeRotation = false;
@@ -126,9 +119,8 @@ public class EnemyController : MonoBehaviour {
                     break;
             }
             playerController.enemyDestroyed = true;
-            StartCoroutine(despawnAfter3());
+            StartCoroutine(DespawnAfter3());
             // rigidbody.AddForceAtPosition(transform.right * 10f, transform.position+Vector3.up*3f, ForceMode.Impulse);
->>>>>>> Stashed changes
         }
     }
 
@@ -139,20 +131,20 @@ public class EnemyController : MonoBehaviour {
     //     }
     // }
 
-    IEnumerator slashWarmup()
+    IEnumerator SlashWarmup()
     {
         yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("Slash");
-        StartCoroutine(slashCooldown());
+        StartCoroutine(SlashCooldown());
     }
 
-    IEnumerator slashCooldown()
+    IEnumerator SlashCooldown()
     {
         yield return new WaitForSeconds(3);
         isAttacking = false;
     }
 
-    IEnumerator despawnAfter3()
+    IEnumerator DespawnAfter3()
     {
         yield return new WaitForSeconds(3);
         playerController.enemyDestroyed = true;
