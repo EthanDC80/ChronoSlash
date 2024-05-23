@@ -10,6 +10,7 @@ TagManager:
   - CorridorActivated
   - SlashRadius
   - Vignette
+  - SwordCollider
   layers:
   - Default
   - TransparentFX
