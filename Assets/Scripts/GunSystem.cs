@@ -41,7 +41,7 @@ public class GunSystem : MonoBehaviour {
         MyInput();
 
         //SetText
-        text.SetText(bulletsLeft + " / " + magSize);
+        // text.SetText(bulletsLeft + " / " + magSize);
 
         if (secFire) {
             parent.GetComponent<PlayerController>().StartSwing(secRayHit);

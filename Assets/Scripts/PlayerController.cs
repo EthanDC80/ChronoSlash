@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -66,6 +67,10 @@ public class PlayerController : MonoBehaviour {
     public static bool cameraMoveable = true;
     private Vector2 mouse;
 
+    //Sense Danger
+    private bool inDanger;
+    private Image vignetteImage;
+
     [Header("Components")]
     public Transform orientation;
     public GameObject cam;
@@ -100,7 +105,9 @@ public class PlayerController : MonoBehaviour {
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         _animator = GameObject.FindWithTag("Sword").GetComponent<Animator>();
+        vignetteImage = GameObject.FindWithTag("Vignette").GetComponent<Image>();
 
         if (!testing) roomManager = GameObject.FindWithTag("RoomManager").GetComponent<RoomManager>();
     }
@@ -108,7 +115,8 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
 
-        rb = GetComponent<Rigidbody>();
+        vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
+        
         //rb.freezeRotation = true;
 
         readyToJump = true;
@@ -156,6 +164,10 @@ public class PlayerController : MonoBehaviour {
         }
         // Debug.Log(pounded + " " + canPoundJump);
         CheckForSwingPoints();
+
+        if (inDanger) {
+            Debug.Log("Danger!");
+        }
     }
 
     void LateUpdate() {
@@ -173,6 +185,24 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.tag == "Corridor") {
             roomManager.GenerateRoom(other.gameObject);
             other.gameObject.tag = "CorridorActivated";
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "SlashRadius") {
+            inDanger = true;
+            Time.timeScale = 0.5f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0.2f);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.tag == "SlashRadius") {
+            inDanger = false;
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
         }
     }
 

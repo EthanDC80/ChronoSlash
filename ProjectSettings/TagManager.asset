@@ -8,6 +8,8 @@ TagManager:
   - Corridor
   - RoomManager
   - CorridorActivated
+  - SlashRadius
+  - Vignette
   layers:
   - Default
   - TransparentFX
