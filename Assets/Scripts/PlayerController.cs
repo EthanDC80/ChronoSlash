@@ -197,12 +197,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+	private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "SlashRadius") {
             inDanger = true;
             Time.timeScale = 0.5f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0.2f);
+            other.GetComponentInParent<EnemyController>().stopped = true;
         }
         
         if (other.gameObject.CompareTag("EnemySwordCollider")) {
@@ -225,6 +226,7 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
+            other.GetComponentInParent<EnemyController>().stopped = false;
         }
     }
 

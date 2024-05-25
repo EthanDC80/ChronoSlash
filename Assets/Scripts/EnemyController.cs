@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour {
     private NavMeshAgent agent;
     Vector3 lastSeen;
 
+    public bool stopped;
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -35,12 +37,21 @@ public class EnemyController : MonoBehaviour {
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         
         isActive = true;
+        stopped = false;
     }
 
     // Update is called once per frame
     void Update() 
     {
-        Move();
+        if (!stopped)
+            Move();
+		else {
+            agent.speed = 0f;
+            Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
+            rotation.x = 0f;
+            rotation.z = 0f;
+            transform.rotation = Quaternion.Euler(rotation);
+        }
         Attack();
     }
 
@@ -49,38 +60,21 @@ public class EnemyController : MonoBehaviour {
 // <<<<<<< Updated upstream
         Vector3 lastSeen = playerTransform.position;
         if (!isAttacking) {
-            //Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
-            //rotation.x = 0f;
-            //rotation.z = 0f;
-            //transform.rotation = Quaternion.Euler(rotation);
-// ======= *Do whatever you need to get the movement working
-//         if (!isAttacking && isActive) {
-//             Vector3 rotation = Quaternion.LookRotation(playerTransform.position-transform.position).eulerAngles;
-//             rotation.x = 0f;
-//             rotation.z = 0f;
-//             transform.rotation = Quaternion.Euler(rotation);
-// >>>>>>> Stashed changes
             
-            Vector3 direction = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
-
-            rigidbody.AddForce(direction * moveSpeed, ForceMode.Force);
-            //agent.destination = playerTransform.position;
+            agent.speed = 10f;
+            agent.destination = playerTransform.position;
             //Debug.Log(rigidbody.velocity.magnitude);
 
-            Vector3 flatVel = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+            //Vector3 flatVel = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
 
             // limit velocity if needed
+            /*
             if (flatVel.magnitude > moveSpeed) {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rigidbody.velocity = new Vector3(limitedVel.x, rigidbody.velocity.y, limitedVel.z);
             }
+            */
             lastSeen = playerTransform.position;
-        }
-
-        if (isAttacking && new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z).magnitude > 0.1f) {
-            rigidbody.velocity *= 0.5f;
-            //agent.destination = lastSeen;
-            //agent.speed *= 0.5f;
         }
         
     }
@@ -88,8 +82,7 @@ public class EnemyController : MonoBehaviour {
     private void Attack()
     {
         if (!isActive) return;
-        Vector3 toPlayer = new Vector3(playerTransform.position.x - transform.position.x, 0, playerTransform.position.z - transform.position.z);
-        if (toPlayer.magnitude < 3 && !isAttacking) {
+        if (stopped && !isAttacking) {
             isAttacking = true;
             StartCoroutine(SlashWarmup());
         }
