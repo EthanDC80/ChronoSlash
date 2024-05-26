@@ -11,6 +11,7 @@ TagManager:
   - SlashRadius
   - Vignette
   - SwordCollider
+  - EnemySwordCollider
   layers:
   - Default
   - TransparentFX
