@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour {
     private Transform playerTransform;
     private SwordSlash swordSlash;
     private PlayerController playerController;
+    private FOVControl FOV;
 
     private float moveSpeed = 5;
     private Vector3 moveDirection;
@@ -35,6 +36,7 @@ public class EnemyController : MonoBehaviour {
         swordSlash = GameObject.FindWithTag("Player").GetComponent<SwordSlash>();
         agent = GetComponent<NavMeshAgent>();
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        FOV = GetComponent<FOVControl>();
         
         isActive = true;
         stopped = false;
@@ -43,16 +45,18 @@ public class EnemyController : MonoBehaviour {
     // Update is called once per frame
     void Update() 
     {
-        if (!stopped)
-            Move();
-		else {
-            agent.speed = 0f;
-            Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
-            rotation.x = 0f;
-            rotation.z = 0f;
-            transform.rotation = Quaternion.Euler(rotation);
-        }
-        Attack();
+        if (FOV.canSeePlayer) {
+            if (!stopped)
+                Move();
+		    else {
+                agent.speed = 0f;
+                Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
+                rotation.x = 0f;
+                rotation.z = 0f;
+                transform.rotation = Quaternion.Euler(rotation);
+            }
+            Attack();
+		}
     }
 
     private void Move()
