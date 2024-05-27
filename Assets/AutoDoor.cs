@@ -14,16 +14,20 @@ public class AutoDoor : MonoBehaviour
     [SerializeField] AnimationCurve curve;
     private float doorAnimSpeed = 1;
 
+    RoomManager roomManager;
+
+    public bool locked;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        roomManager = GameObject.FindWithTag("RoomManager").GetComponent<RoomManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (moveDoor) {
+        if (moveDoor && !locked) {
             current = Mathf.MoveTowards(current, target, doorAnimSpeed * Time.deltaTime);
             doorRight.localPosition = new Vector3(Mathf.Lerp(startPos, endPos, curve.Evaluate(current)), doorRight.localPosition.y, doorRight.localPosition.z);
             doorLeft.localPosition = new Vector3(-Mathf.Lerp(startPos, endPos, curve.Evaluate(current)), doorRight.localPosition.y, doorRight.localPosition.z);
@@ -35,9 +39,14 @@ public class AutoDoor : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player")) {
+            if (gameObject.CompareTag("Corridor")) {
+                roomManager.GenerateRoom(gameObject.transform.parent.gameObject);
+                gameObject.tag = "CorridorActivated";
+            }
             moveDoor = true;
             current = 0f;
             target = 1f;
+
         }
     }
 

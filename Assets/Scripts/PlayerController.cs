@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private bool testing;
 
     private RoomManager roomManager;
+    public GameObject currentRoom;
 
     [Header("Movement")]
     public float walkSpeed = 7f;
@@ -189,14 +190,6 @@ public class PlayerController : MonoBehaviour {
         cam.transform.rotation = Quaternion.Euler(-mouse.y, mouse.x, 0);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Corridor") {
-            roomManager.GenerateRoom(other.gameObject);
-            other.gameObject.tag = "CorridorActivated";
-        }
-    }
-
 	private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "SlashRadius") {
             inDanger = true;
@@ -217,6 +210,10 @@ public class PlayerController : MonoBehaviour {
                     StartCoroutine(InvincibleBuffer());
 
             }
+        }
+
+        if (other.gameObject.CompareTag("RoomEntrance")) {
+            currentRoom = other.gameObject.transform.parent.gameObject;
         }
     }
 

@@ -15,7 +15,14 @@ public class RoomManager : MonoBehaviour
     private GameObject currentRoom;
     private RoomData currentRoomData;
 
-    private GameObject prevRoom1, prevRoom2;
+    private GameObject prevExit, prevExit2;
+
+    private PlayerController playerController;
+
+    void Awake()
+    {
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -48,15 +55,17 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         // GenerateRoom();
     }
 
     public void GenerateRoom(GameObject corridor)
     {
-        prevRoom2 = prevRoom1;
-        prevRoom1 = currentRoom;
-        if (prevRoom2 != null) Destroy(prevRoom2);
+        // prevRoom2 = prevRoom1;
+        // prevRoom1 = currentRoom;
+        // if (prevRoom2 != null) Destroy(prevRoom2);
+
+
 
         int roomIndex = Random.Range(1,roomPrefabs.Length);
         currentRoom = Instantiate(roomPrefabs[roomIndex]);
@@ -92,8 +101,8 @@ public class RoomManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log(corridor.transform.parent.name + " " + corridor.transform.parent.rotation.eulerAngles);
-        Debug.Log(currentRoom.name + " " + currentRoom.transform.rotation.eulerAngles);
+        // Debug.Log(corridor.transform.parent.name + " " + corridor.transform.parent.rotation.eulerAngles);
+        // Debug.Log(currentRoom.name + " " + currentRoom.transform.rotation.eulerAngles);
 
         // currentRoom.transform.rotation = Quaternion.Euler(0, corridor.transform.rotation.eulerAngles.y, 0);
 
@@ -172,5 +181,39 @@ public class RoomManager : MonoBehaviour
             // Debug.Log(exit.name + " " + exit.transform.rotation.eulerAngles);
             // Debug.Log(instanceExit.name + " " + instanceExit.transform.rotation.eulerAngles);
         }
+    }
+
+    public void DespawnRoom(GameObject thisExit)
+    {
+        if (prevExit != null) {
+            prevExit.GetComponentInChildren<AutoDoor>().locked = true;
+            prevExit.transform.parent = null;
+        }
+
+        //*Lock Doors
+        foreach(Transform exit in thisExit.transform.parent) {
+            if(exit.CompareTag("CorrObj")) {
+                Debug.Log("Found A Corridor");
+                if (exit.gameObject != thisExit) {
+                    Debug.Log("Locking not this");
+                    exit.gameObject.GetComponentInChildren<AutoDoor>().locked = true;
+                    // Debug.Log(exit.gameObject.GetComponentInChildren<AutoDoor>().locked);
+                } else {
+                    if (prevExit2 != null) Destroy(prevExit2);
+                    if (prevExit != null) prevExit2 = prevExit;
+                    prevExit = exit.gameObject;
+                }
+            }
+        }
+
+        //*Delete Rooms
+        foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room")) {
+            if (room != playerController.currentRoom && room != thisExit.transform.parent.gameObject)
+                Destroy(room);
+        }
+        // foreach (GameObject exit in prevRoomExits) {
+        //     Debug.Log("a");
+            
+        // }
     }
 }

@@ -596,6 +596,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589365996332241523, guid: 6ef7ebcb71f68ab46a919eb6f777d9de, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3076872978506623665, guid: 6ef7ebcb71f68ab46a919eb6f777d9de, type: 3}
       propertyPath: m_Name
       value: Small Room 4
@@ -639,6 +643,10 @@ PrefabInstance:
     - target: {fileID: 4495776814710325527, guid: 6ef7ebcb71f68ab46a919eb6f777d9de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6736207455813849650, guid: 6ef7ebcb71f68ab46a919eb6f777d9de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
