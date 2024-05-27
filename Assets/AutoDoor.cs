@@ -44,9 +44,8 @@ public class AutoDoor : MonoBehaviour
                 gameObject.tag = "CorridorActivated";
             }
             moveDoor = true;
-            current = 0f;
+            // current = 0f;
             target = 1f;
-
         }
     }
 
@@ -54,7 +53,7 @@ public class AutoDoor : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) {
             moveDoor = true;
-            current = 1f;
+            // current = 1f;
             target = 0f;
 
         }
