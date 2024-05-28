@@ -26,6 +26,11 @@ public class EnemyController : MonoBehaviour {
 
     public bool stopped;
 
+    public float timeSearch;
+    public float timeElapsed;
+
+    public bool lost;
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -40,45 +45,47 @@ public class EnemyController : MonoBehaviour {
         
         isActive = true;
         stopped = false;
+
+        timeSearch = 5f;
+
+        lastSeen = transform.position + new Vector3(Random.Range(-9f, 9f), Random.Range(0, 9f), Random.Range(-9f, 9f));
     }
 
     // Update is called once per frame
     void Update() 
     {
-        if (FOV.canSeePlayer) {
-            if (!stopped)
-                Move();
-		    else {
-                agent.speed = 0f;
-                Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
-                rotation.x = 0f;
-                rotation.z = 0f;
-                transform.rotation = Quaternion.Euler(rotation);
-            }
-            Attack();
-		}
+        if (!stopped)
+            Move();
+		else {
+            agent.speed = 0f;
+            Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
+            rotation.x = 0f;
+            rotation.z = 0f;
+            transform.rotation = Quaternion.Euler(rotation);
+        }
+        Attack();
     }
 
     private void Move()
     {
-// <<<<<<< Updated upstream
-        Vector3 lastSeen = playerTransform.position;
-        if (!isAttacking) {
-            
-            agent.speed = 10f;
-            agent.destination = playerTransform.position;
-            //Debug.Log(rigidbody.velocity.magnitude);
-
-            //Vector3 flatVel = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-
-            // limit velocity if needed
-            /*
-            if (flatVel.magnitude > moveSpeed) {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rigidbody.velocity = new Vector3(limitedVel.x, rigidbody.velocity.y, limitedVel.z);
-            }
-            */
+        Vector3 direction = new Vector3(transform.position.x - lastSeen.x, 0, transform.position.z - lastSeen.z);
+        if (FOV.canSeePlayer) {
             lastSeen = playerTransform.position;
+            lost = false;
+        }
+        else if (!lost && direction.magnitude < 0.1f) {
+            lost = true;
+            Debug.Log("lost");
+		}
+        else if (lost && (direction.magnitude < 0.1f || timeElapsed >= timeSearch)) {
+            lastSeen = transform.position + new Vector3(Random.Range(-9f, 9f), Random.Range(0, 9f), Random.Range(-9f, 9f));
+            timeElapsed = 0;
+            Debug.Log("ASDFADFADF");
+        }
+        timeElapsed += Time.deltaTime;
+        if (!isAttacking) {
+            agent.speed = 10f;
+            agent.destination = lastSeen;
         }
         
     }
