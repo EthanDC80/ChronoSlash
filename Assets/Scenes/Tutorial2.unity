@@ -472,7 +472,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ethan Cheng       Masaki Muneyoshi
+  m_text: 'Rooms go on forever... clear as many rooms as possible
+
+    before you
+    get killed by the terrifying chess pieces...
+
+
+    Once you''re in a room, you
+    can''t go back...
+
+    KEEP GOING!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}
   m_sharedMaterial: {fileID: -4845831423697949402, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}
@@ -803,7 +812,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ChronoSlash
+  m_text: Objective
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}
   m_sharedMaterial: {fileID: -4845831423697949402, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}
@@ -1041,7 +1050,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1285976707247650157}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadTut1
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1068,7 +1077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -126}
+  m_AnchoredPosition: {x: 0, y: -148}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5034151234336827701
@@ -1181,7 +1190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Start !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}
   m_sharedMaterial: {fileID: -4845831423697949402, guid: a6842196ee358b64cb1aa8d527d57b55, type: 2}

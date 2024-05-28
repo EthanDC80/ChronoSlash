@@ -19,6 +19,8 @@ public class RoomManager : MonoBehaviour
 
     private PlayerController playerController;
 
+    [SerializeField] private GameObject enemyPrefab;
+
     void Awake()
     {
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -107,6 +109,10 @@ public class RoomManager : MonoBehaviour
         // currentRoom.transform.rotation = Quaternion.Euler(0, corridor.transform.rotation.eulerAngles.y, 0);
 
         currentRoom.transform.position = corridor.transform.position - corridor.transform.up*1.5f;
+
+        if (currentRoomData.hasEnemy) {
+            Instantiate(enemyPrefab, currentRoomData.enemySpawnLocation[Random.Range(0,currentRoomData.enemySpawnLocation.Length)].transform.position, Quaternion.Euler(0,180,0));
+        }
 
         GenerateExits();
 

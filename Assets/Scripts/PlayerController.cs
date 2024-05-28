@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour {
         healthPoints += hp;
 
         for (int i = 0; i < hpUI.Length; i++) {
-            if (i < hp)
+            if (i < healthPoints)
                 hpUI[i].SetActive(true);
             else
                 hpUI[i].SetActive(false); 

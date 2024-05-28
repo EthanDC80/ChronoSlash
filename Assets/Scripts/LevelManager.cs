@@ -13,6 +13,16 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadLevel("Title"));
     }
 
+    public void LoadTut1()
+    {
+        StartCoroutine(LoadLevel("Tutorial1"));
+    }
+
+    public void LoadTut2()
+    {
+        StartCoroutine(LoadLevel("Tutorial2"));
+    }
+
     public void LoadGame()
     {
         StartCoroutine(LoadLevel("Demo"));

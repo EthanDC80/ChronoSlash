@@ -4116,6 +4116,11 @@ MonoBehaviour:
   - {fileID: 3657532516702630666}
   - {fileID: 3606604156108518106}
   - {fileID: 7133358130868095888}
+  hasEnemy: 1
+  enemySpawnLocation:
+  - {fileID: 5879799914866165849}
+  - {fileID: 462227271472224928}
+  - {fileID: 2799963245467871484}
 --- !u!1 &6287338702677343312
 GameObject:
   m_ObjectHideFlags: 0

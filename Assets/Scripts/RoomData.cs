@@ -16,4 +16,7 @@ public class RoomData : MonoBehaviour
 
     public GameObject entrance; //gameobject at entrance
     public GameObject[] exit = new GameObject[1]; //gameobject at exit, put as many as specified in numberExits
+
+    public bool hasEnemy;
+    public GameObject[] enemySpawnLocation = new GameObject [1];
 }

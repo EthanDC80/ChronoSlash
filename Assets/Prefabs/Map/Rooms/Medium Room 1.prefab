@@ -8700,6 +8700,10 @@ MonoBehaviour:
   - {fileID: 552332991533445447}
   - {fileID: 8387725801305544554}
   - {fileID: 2311836053294230939}
+  hasEnemy: 1
+  enemySpawnLocation:
+  - {fileID: 323118790092137624}
+  - {fileID: 9213297041225441687}
 --- !u!1 &8847099533920603381
 GameObject:
   m_ObjectHideFlags: 0
