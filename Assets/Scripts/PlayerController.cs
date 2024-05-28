@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour {
     private Image vignetteImage;
     public bool enemyDestroyed;
     public int healthPoints = 5;
+    [SerializeField] GameObject[] hpUI = new GameObject[5];
     private bool invincible;
 
     [Header("Components")]
@@ -202,7 +203,7 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag("EnemySwordCollider")) {
             if(other.GetComponentInParent<EnemyController>().isAttacking && !invincible) {
                 Debug.Log("Attacked");
-                healthPoints--;
+                ChangeHP(-1);
                 if (healthPoints == 0) {
                     Debug.Log("GAMEOVER");
                     //TODO ADD GAMEOVER METHOD
@@ -231,6 +232,18 @@ public class PlayerController : MonoBehaviour {
         invincible = true;
         yield return new WaitForSeconds(2);
         invincible = false;
+    }
+
+    private void ChangeHP(int hp) 
+    {
+        healthPoints += hp;
+
+        for (int i = 0; i < hpUI.Length; i++) {
+            if (i < hp)
+                hpUI[i].SetActive(true);
+            else
+                hpUI[i].SetActive(false); 
+        }
     }
 
     void MyInput() {
