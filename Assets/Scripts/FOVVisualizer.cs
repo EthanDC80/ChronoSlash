@@ -1,3 +1,4 @@
+/*
 using UnityEditor;
 using UnityEngine;
 
@@ -27,3 +28,4 @@ public class FOVVisualizer : Editor {
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 }
+*/
