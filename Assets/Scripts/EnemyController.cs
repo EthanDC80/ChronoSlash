@@ -25,7 +25,6 @@ public class EnemyController : MonoBehaviour {
     Vector3 lastSeen;
 
     public bool stopped;
-    public bool killed;
 
     public float timeSearch;
     public float timeElapsed;
@@ -46,7 +45,6 @@ public class EnemyController : MonoBehaviour {
         
         isActive = true;
         stopped = false;
-        killed = false;
 
         timeSearch = 5f;
 
@@ -56,18 +54,16 @@ public class EnemyController : MonoBehaviour {
     // Update is called once per frame
     void Update() 
     {
-        if (!killed) {
-            if (!stopped)
-                Move();
-            else if (!killed) {
-                agent.speed = 0f;
-                Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
-                rotation.x = 0f;
-                rotation.z = 0f;
-                transform.rotation = Quaternion.Euler(rotation);
-            }
-            Attack();
+        if (!stopped)
+            Move();
+		else {
+            agent.speed = 0f;
+            Vector3 rotation = Quaternion.LookRotation(playerTransform.position - transform.position).eulerAngles;
+            rotation.x = 0f;
+            rotation.z = 0f;
+            transform.rotation = Quaternion.Euler(rotation);
         }
+        Attack();
     }
 
     private void Move()
@@ -79,10 +75,12 @@ public class EnemyController : MonoBehaviour {
         }
         else if (!lost && direction.magnitude < 0.1f) {
             lost = true;
+            Debug.Log("lost");
 		}
         else if (lost && (direction.magnitude < 0.1f || timeElapsed >= timeSearch)) {
             lastSeen = transform.position + new Vector3(Random.Range(-9f, 9f), Random.Range(0, 9f), Random.Range(-9f, 9f));
             timeElapsed = 0;
+            Debug.Log("ASDFADFADF");
         }
         timeElapsed += Time.deltaTime;
         if (!isAttacking) {
@@ -106,29 +104,22 @@ public class EnemyController : MonoBehaviour {
 
             // Debug.Log("Attacked");
             isActive = false;
-            //rigidbody.freezeRotation = false;
-            stopped = true;
-            killed = true;
-            switch (swordSlash.attackDirection) {
+            rigidbody.freezeRotation = false;
+            switch(swordSlash.attackDirection) {
                 case 0:
-                    //rigidbody.AddForceAtPosition(transform.forward * -100f + transform.up*-50f, transform.position+Vector3.up*30f, ForceMode.Impulse);
-                    rigidbody.AddForce(transform.forward * -100f + transform.up * -50f, ForceMode.Impulse);
+                    rigidbody.AddForceAtPosition(transform.forward * -10f + transform.up*-5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
                     break;
                 case -1:
-                    //rigidbody.AddForceAtPosition(transform.right * 50f, transform.position+Vector3.up*30f, ForceMode.Impulse);
-                    rigidbody.AddForce(transform.right * 50f, ForceMode.Impulse);
+                    rigidbody.AddForceAtPosition(transform.right * 5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
                     break;
                 case -2:
-                    //rigidbody.AddForceAtPosition(transform.right * 50f + transform.up*-30f, transform.position+Vector3.up*30f, ForceMode.Impulse);
-                    rigidbody.AddForce(transform.right * 50f + transform.up * -30f, ForceMode.Impulse);
+                    rigidbody.AddForceAtPosition(transform.right * 5f + transform.up*-3f, transform.position+Vector3.up*3f, ForceMode.Impulse);
                     break;
                 case 1:
-                    //rigidbody.AddForceAtPosition(transform.right * -50f, transform.position+Vector3.up*30f, ForceMode.Impulse);
-                    rigidbody.AddForce(transform.right * -50f, ForceMode.Impulse);
+                    rigidbody.AddForceAtPosition(transform.right * -5f, transform.position+Vector3.up*3f, ForceMode.Impulse);
                     break;
                 case 2:
-                    //rigidbody.AddForceAtPosition(transform.right * -50f + transform.up*-30f, transform.position+Vector3.up*30f, ForceMode.Impulse);
-                    rigidbody.AddForce(transform.right * -50f + transform.up * -30f, ForceMode.Impulse);
+                    rigidbody.AddForceAtPosition(transform.right * -5f + transform.up*-3f, transform.position+Vector3.up*3f, ForceMode.Impulse);
                     break;
             }
             playerController.enemyDestroyed = true;
