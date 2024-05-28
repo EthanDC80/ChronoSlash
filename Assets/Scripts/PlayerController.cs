@@ -197,8 +197,7 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 0.5f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0.2f);
-            if (!other.GetComponentInParent<EnemyController>().killed)
-                other.GetComponentInParent<EnemyController>().stopped = true;
+            other.GetComponentInParent<EnemyController>().stopped = true;
         }
         
         if (other.gameObject.CompareTag("EnemySwordCollider")) {
