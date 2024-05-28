@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -220,63 +220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &340640977
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.5240545
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.037586376
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.2784338
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.804008
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -335.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 337.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202753432148896514, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -251.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7547613757493850552, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
-      propertyPath: m_Name
-      value: Katana
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7d5bb72c52d03d340b68311f4b32c191, type: 3}
 --- !u!1001 &349341764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1406,6 +1349,11 @@ MonoBehaviour:
   - {fileID: 6244443381037648659, guid: 7933b5319d1520f4b9ff1296cf08bf29, type: 3}
   - {fileID: 3076872978506623665, guid: 6ef7ebcb71f68ab46a919eb6f777d9de, type: 3}
   - {fileID: 8810392968855732067, guid: 68fe3ebb25ab80c4f94e701806b53f7a, type: 3}
+  - {fileID: 3843383383142943191, guid: 32064b8cd8d40c649b3230bff28502ed, type: 3}
+  - {fileID: 3259084848964575986, guid: 7f7c3470ccb85684f986477069d510df, type: 3}
+  - {fileID: 509699715517062996, guid: cbd1ff914fa647b4292dd7c3023728c8, type: 3}
+  - {fileID: 1324653957382801584, guid: c1fd37982aa0af946a41e815db68d2f4, type: 3}
+  - {fileID: 6359918202285340416, guid: 5707f73daf8336f44bc040f827da6136, type: 3}
   roomJointPrefab: {fileID: 8726831168813559130, guid: 8638c88a33546aa47861b27f89e56317, type: 3}
 --- !u!4 &2117712870
 Transform:
@@ -1432,4 +1380,3 @@ SceneRoots:
   - {fileID: 110995940}
   - {fileID: 957551179}
   - {fileID: 2085166988}
-  - {fileID: 340640977}
