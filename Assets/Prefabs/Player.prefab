@@ -368,6 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ddf433d180af94a939c691a29b28b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 0
+  currentRoom: {fileID: 0}
   walkSpeed: 7
   sprintSpeed: 15
   airSpeed: 5
@@ -395,6 +397,14 @@ MonoBehaviour:
   forThrust: 2000
   extendCableSpeed: 20
   MouseSensitivity: 400
+  enemyDestroyed: 0
+  healthPoints: 5
+  hpUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   orientation: {fileID: 1358357422259804905}
   cam: {fileID: 1017259912613532336}
   poundWindow: 0.2
@@ -517,6 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728cacd79d1bac4aaf587d6befc48e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
+  attackDirection: 0
 --- !u!1 &6409526109534405759
 GameObject:
   m_ObjectHideFlags: 0
