@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1772,6 +1772,10 @@ PrefabInstance:
     - target: {fileID: 2959834280845482265, guid: aa4384bc1dee10449a05dea90505362f, type: 3}
       propertyPath: m_Name
       value: KnightLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222332183724904754, guid: aa4384bc1dee10449a05dea90505362f, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
